@@ -1,0 +1,55 @@
+<input type="hidden" id="sortcolumn"  value="dtParution">
+<input type="hidden" id="sortorder"   value="asc">
+<input type="hidden" id="search-page" value="0">
+<input type="hidden" id="search-size" value="5">
+
+<!--MENU -->
+<div class="container-fluid">
+
+    <!-- TEXTE -->
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <p>
+                <i>Consulter et gérer l'ensemble des offres d'emploi de votre entreprise.</i>
+            </p>
+        </div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="row">
+        <div class="col-sm-12">
+          <div>
+              <h4 ng-if="page.content.length>0" class="body-offres-results">{{page.totalElements}} Résultat(s)</h4>
+              <h4 ng-if="page.content.length==0" class="body-offres-results">Aucun offre pour cette recherche...</h4>
+    </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr style="text-align: center">
+                        <th ng-click="setSortColumn('dtParution')"  class="sortable" id="dtParution">Parution&nbsp;<i ng-class="sortColumn=='dtParution' ? (sortOrder=='asc' ? 'fa fa-sort-up':'fa fa-sort-down') : 'fa fa-sort'"></i></th>
+                        <th ng-click="setSortColumn('titre')"       class="sortable" id="titre">Titre&nbsp;<i ng-class="sortColumn=='titre' ? (sortOrder=='asc' ? 'fa fa-sort-up':'fa fa-sort-down') : 'fa fa-sort'"></i></th>
+                        <th ng-click="setSortColumn('contrat')"     class="sortable" id="contrat">Contrat&nbsp;<i ng-class="sortColumn=='contrat' ? (sortOrder=='asc' ? 'fa fa-sort-up':'fa fa-sort-down') : 'fa fa-sort'"></i></th>
+                        <th class="sortable" id="candidature">nb cand.&nbsp;</th>
+                        <th ng-click="setSortColumn('pourvu')"      class="sortable" id="pourvu">Clôturé&nbsp;<i ng-class="sortColumn=='pourvu' ? (sortOrder=='asc' ? 'fa fa-sort-up':'fa fa-sort-down') : 'fa fa-sort'"></i></th>
+                        <th><a href="#/entreprise/offre/add"><i style="font-size:20px" class="fa fa-plus-square"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center" ng-repeat="offre in page.content">
+                        <td style="vertical-align: middle" height="80px">{{offre.dtParution | date : 'dd/MM/yyyy'}}</td>
+                        <td style="vertical-align: middle" >{{offre.titre}}</td>
+                        <td style="vertical-align: middle" >{{offre.contrat.nom}}<br>{{offre.dureeContrat}} {{offre.dureeContrat != null ? ' mois' : ''}}</td>
+                        <td style="vertical-align: middle" >{{offre.nbCandidature}}</td>
+                        <td style="vertical-align: middle" >{{offre.pourvu ? 'Oui' : 'Non'}}</td>
+                        <td style="vertical-align: middle" >
+                            <a href="#/entreprise/offre/edit/{{offre.id}}"><i style="font-size:20px" class="fa fa-edit"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-include ng-init="page=page" src="'/components/pagination/pagination.html'"></div>
+        </div>
+    </div>
+</div>

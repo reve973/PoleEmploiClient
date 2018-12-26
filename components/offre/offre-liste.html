@@ -1,0 +1,114 @@
+<div class="header container-fluid">
+<div class="row">
+    
+        <!-- ADVANCED FILTER -->
+        <div class="col-md-2 collapse body-offres-advanced-filter" id="collapseAdvancedFilter">
+            <form>
+                <div class="form-row body-offres-advanced-filter-title">
+                    Type de contrat
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" ng-change="updateSearch()" name="search-CDD" id="search-CDD" ng-model="searchCDD">
+                    <label class="form-check-label" for="checkCDD">CDD</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" ng-change="updateSearch()" name="search-CDDI" id="search-CDDI" ng-model="searchCDDI">
+                    <label class="form-check-label" for="checkCDDI">CDDI</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" ng-change="updateSearch()" name="search-CDI" id="search-CDI" ng-model="searchCDI">
+                    <label class="form-check-label" for="checkCDI">CDI</label>
+                </div>
+            </form>
+        </div>
+
+        <!-- FILTER -->
+        <div class="col-md-10">
+            <!-- BODY -->
+            <div class="body container">
+                <div class="body-offres-filter">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-md-4 col-sm-12">
+                                <input type="text" class="form-control" ng-change="searchCriteriaUpdated()" name="search-keyword" id="search-keyword" ng-model="searchKeyword" placeholder="Mot clef"
+                                    />
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <input type="text" class="form-control " ng-change="searchCriteriaUpdated()" name="search-commune" id="search-commune" ng-model="searchCommune" placeholder="Commune"
+                                    />
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" ng-click="doSearch()" id="search-submit" type="submit">OK</button>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="search-page" id="search-page" ng-model="searchPage">
+                        <input type="hidden" name="search-size" id="search-size" ng-model="searchSize">
+                        <input type="hidden" name="search-page1" ng-model="sortOrder">
+                        <input type="hidden" name="search-page2" ng-model="sortColumn">
+
+
+                    </form>
+                    <br>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseAdvancedFilter"
+                        aria-expanded="false" aria-controls="collapseExample">Affiner</button>
+                </div>
+
+                <hr>
+ 
+                <!-- OFFRES -->
+                <div class="body-offres" style="background-color: blue1" id="result-offres">
+
+                    <div class="row">
+                        <h4 ng-if="page.content.length>0" class="col-4 body-offres-results">{{page.totalElements}} Résultat(s)</h4>
+                        <h4 ng-if="page.content.length==0" class="col-12 body-offres-results">Aucun offre pour cette recherche...</h4>        
+                        <div class="col-8">
+                            <span ng-if="page.content.length>0" class="form-group row">
+                                <select ng-change="updateSearch()" ng-options="item.title for item in selectSortColumn" class="col-5" ng-model="sortColumn" name="sortColumn"/>
+                                {{sortColumn}}
+                                &nbsp;
+                                <select ng-change="updateSearch()" ng-options="item.title for item in selectSortOrder" class="col-5" ng-model="sortOrder" name="sortOrder"/>
+                                {{sortOrder}}
+                            </span>
+                        </div>
+                    </div>                    
+
+                    <div class="body-offre" ng-repeat="offre in page.content" (click)="show(offre)">
+                        <div class="row">
+                            <div class="col-10 body-offre-title">
+                              {{offre.titre}}                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <div class="body-offre-entreprise">
+                                    {{offre.entreprise.denom}} - {{offre.commune}}
+                                </div>
+                                <div class="body-offre-description">
+                                    {{truncate(150, offre.description)}}
+                                </div>
+                                <div class="body-offre-parution">
+                                    {{offre.dtParution | date : 'dd/MM/yyyy'}}
+                                </div>
+                            </div>
+                            <div class="col-2 body-offre-contrat">
+                                {{offre.contrat.nom}}<br>
+                                {{offre.dureeContrat == null ? '' : offre.dureeContrat + ' mois' }}<br>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div ng-include ng-init="page=page" src="'/components/pagination/pagination.html'"></div>
+                    <!--                    
+                    <ng-include src="../pagination/pagination.html" ></ng-include>
+                    <app-pagination (pageEvent)="pageEventHander($event)" [page]="page"></app-pagination>
+                    -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

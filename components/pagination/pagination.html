@@ -1,0 +1,18 @@
+<!-- Pagination -->
+<nav ng-if="page != null" aria-label="Page navigation" ng-controller="PaginationCtrl">
+        <ul class="pagination justify-content-end">
+    
+            <li ng-if="page.totalPages>0" ng-class="page.number == 0 ? 'page-item disabled ' : 'page-item'">
+                <a class="page-link" ng-click="goToPage(page.number-1)" tabindex="-1"><i class="fa fa-angle-left"></i></a>
+            </li>
+    
+    
+            <li ng-repeat="p in [] | range:page.totalPages" ng-class="$index == page.number ? 'page-item active ' : 'page-item'">
+                <a class="page-link active" ng-click="goToPage($index)">{{$index + 1}}</a>
+            </li>   
+    
+            <li ng-if="page.totalPages>0" ng-class="page.number == page.totalPages-1 ? 'page-item disabled ' : 'page-item'">
+                <a class="page-link" ng-click="goToPage(page.number+1)" tabindex="-1"><i class="fa fa-angle-right"></i></a>
+            </li>
+        </ul>
+    </nav>

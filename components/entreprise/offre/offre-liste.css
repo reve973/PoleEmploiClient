@@ -1,0 +1,16 @@
+.body-offres-results {
+    color : #ff5950;
+}
+
+.sortable {
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sort_asc {
+    
+}
+
+.sort_dsc {
+    cursor: pointer;
+}

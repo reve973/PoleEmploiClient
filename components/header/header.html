@@ -1,0 +1,131 @@
+
+<div class="container-fluid" ng-controller="HeaderCtrl">
+  <div class="header-menu collapse" id="collapseMenu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown"><a class="dropdown-item" href="#/" data-toggle="collapse" data-target="#collapseMenu" ><i class="fa fa-home"></i>&nbsp;Accueil</a> 
+            <span ng-if="!isAuthenticated()">
+                <div class="dropdown-divider"></div> 
+                <a class="dropdown-item" data-toggle="collapse" data-target="#collapseMenu" ng-click="connexion()"><i class="fas fa-sign-out-alt"></i>&nbsp;Connexion</a>
+            </span> 
+
+            <span ng-if="isAuthenticated()">
+                <div class="dropdown-divider"></div> 
+                <a class="dropdown-item" data-toggle="collapse" data-target="#collapseMenu" ng-click="deconnexion()">
+                  <i class="fas fa-sign-out-alt"></i>
+                  &nbsp;Déconnexion
+                </a>
+            </span> 
+
+            <span [appVisibilityAuth]="['ROLE_ADMIN']">
+              <div class="dropdown-divider"></div> 
+              <a class="dropdown-item" data-toggle="collapse" data-target="#collapseMenu" routerLink="/utilisateurs/liste">
+                <i class="fa fa-user"></i>
+                &nbsp;Gestion des utilisateurs
+              </a>
+          </span>            
+
+          <span ng-if="isAuthenticated()">
+                <div class="dropdown-divider"></div> 
+                <a class="dropdown-item" data-toggle="collapse" data-target="#collapseMenu" href="#/offre/liste">
+                  <i style="color: yellow;" class="fa fa-sticky-note"></i>
+                  &nbsp;Consulter les offres
+                </a>
+            </span>            
+
+            <span [appVisibilityAuth]="['ROLE_ENTREPRISE']">
+                <div class="dropdown-divider"></div> 
+                <a class="dropdown-item" data-toggle="collapse" data-target="#collapseMenu" href="#/entreprise/offre/liste">
+                  <i style="color: green;" class="fa fa-sticky-note"></i>
+                  &nbsp;Gèrer mes offres
+                </a>
+            </span>
+
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="header container-fluid">
+
+    <!--HEADER - LOGO -->
+    <div class="header-logo">
+      <a th:href="@{'/'}"> <img
+        src="https://candidat.pole-emploi.fr/offres/assets/meta/socle/87720874/pechartegraphique/img/header-logo-pole-emploi-mono.svg">
+      </a>
+    </div>
+
+    <!--HEADER - MENU -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#collapseMenu" aria-expanded="false"
+      aria-controls="collapseExample">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <!--
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMenu"
+            aria-expanded="false" aria-controls="collapseExample">Menu</button>
+        -->
+    <!-- HEADER - SEARCH -->
+    <!--
+        <div class="header-search">
+            <form class="form-inline">
+                <input class="form-control" type="search" placeholder="..." aria-label="Rechercher">
+                <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            </form>
+        </div>
+        -->
+  </div>
+  <div class="header-separation">
+    &nbsp; 
+    <span ng-if="isAuthenticated()">               
+      {{getIdentificationUser()}}
+      <a href="#" ng-click="deconnexion()"><i style="color: white" class="fas fa-sign-out-alt"></i></a>
+    </span> 
+    <span ng-if="!isAuthenticated()"> 
+      Non connecté 
+      <a href="#" ng-click="connexion()"><i style="color: white" class="fas fa-sign-in-alt"></i></a>
+    </span>
+  </div>
+
+
+  <!-- CONNEXION -->
+  <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open
+        modal for @getbootstrap</button>
+    -->
+  <div class="modal fade" id="connexionModal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="username" class="col-form-label">Identifiant</label>
+              <input type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-form-label">Mot de
+                passe</label> <input type="password" class="form-control"
+                id="password">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

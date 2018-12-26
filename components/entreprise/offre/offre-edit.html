@@ -1,0 +1,88 @@
+<div *ngIf="offre!=null" class="container">
+
+		<!-- TEXTE -->
+		<div class="row">
+			<div class="col-12">
+				<br>
+				<p>
+					<i ng-if="offre.id!=null">Edition d'une offre d'emploi</i> 
+					<i ng-if="offre.id==null">Création d'une offre d'emploi</i>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<form name="form" class="col-12" novalidate>
+
+                <!-- BOUTONS -->
+				<div class="form-group text-right">
+					<button type="button" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="saveOrUpdate()" title="Enregistrer"><i class="fa fa-check" aria-hidden="true"></i></button>&nbsp;
+					<button ng-if="offre.id!=null" type="button" class="btn btn-primary" ng-click="delete()" title="Supprimer"><i class="fa fa-trash" aria-hidden="true"></i></button>&nbsp;
+                    <button type="button" class="btn btn-primary" ng-click="cancel()" title="Annuler"><i class="fa fa-times" aria-hidden="true"></i></button>&nbsp;
+				</div>
+
+                <!-- TITRE -->
+				<div class="form-group row">
+					<label for="titre" class="font-weight-bold col-sm-3 col-lg-2 col-form-label">Titre*</label>
+                    <input ng-class="{ 'is-invalid': submitted && f.titre.errors }" class="form-control col-sm-9" type="text" name="titre" ng-model="offre.titre" ng-required="true" ng-minlength="5" ng-maxlength="250">					
+                    
+                    <p ng-show="form.titre.$error.required || form.titre.$error.minlength || form.titre.$error.maxlength" class="help-block">Le titre est requis (5 à 250 caractères)</p>
+                </div>
+                
+                <!-- DATE PARUTION -->
+				<div class="form-group row">
+					<label for="dtParution" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Parution*</label>
+					<input ng-class="{ 'is-invalid': submitted && f.dtParution.errors }" class="form-control col-sm-4 col-md-3 col-lg-2" type="date" name="dtParution" ng-model="offre.dtParution" ng-required>
+{{offre.dtParution}}
+                    <p ng-show="form.dtParution.$error.required" class="help-block">La date de parution est requise</p>
+                </div>
+                
+                <!-- POURVUE -->
+				<div class="form-group row">
+					<label for="pourvu" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Pourvu</label> 
+					<input class="form-control col-sm-1" type="checkbox" name="pourvu" ng-model="offre.pourvu">
+                </div>
+                
+                <!-- SALAIRE BRUT -->
+				<div class="form-group row">
+					<label for="salaireBrut" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Salaire brut*</label> 
+					<input ng-class="{ 'is-invalid': submitted && f.salaireBrut.errors }" class="form-control col-sm-2 col-lg-1" min="0" value="0" step="0.01" type="number" name="salaireBrut" placeholder="0.00" ng-model="offre.salaireBrut" ng-required="true">
+
+                    <p ng-show="form.salaireBrut.$error.required" class="help-block">Le salaire brut est requis</p>
+                </div>
+                
+                <!-- CONTRAT - DUREE -->
+                <div class="form-group row">
+					<label for="contrat" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Contrat*</label> 
+					<select class="font-weight-bold col-sm-3 col-form-label col-lg-2" ng-options="item.nom for item in contrats"  ng-model="offre.contrat" name="contrat" ng-required="true"></select>
+
+                    <p ng-show="form.contrat.$error.required" class="help-block">Le type de contrat est requis</p>
+                    
+					<label for="dureeContrat" class="font-weight-bold col-sm-3 col-md-3 col-md-offset-1	offset-lg-1 col-lg-2 col-form-label">Durée (mois)</label> 
+					<input ng-class="{ 'is-invalid': submitted && f.dureeContrat.errors }" class="form-control col-sm-2 col-lg-1" type="number" name="dureeContrat" ng-model="offre.dureeContrat">					
+                </div>
+                
+                <!-- COMMUNE -->
+				<div class="form-group row">
+					<label for="commune" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Commune*</label> 
+					<input ng-class="{ 'is-invalid': submitted && f.commune.errors }" class="form-control col-sm-9" type="text" name="commune" ng-model="offre.commune" ng-required="true" ng-minlength="5" ng-maxlength="50">
+
+                    <p ng-show="form.commune.$error.required || form.commune.$error.minlength || form.commune.$error.maxlength" class="help-block">Le type de contrat est requis</p>
+                </div>
+                
+                <!-- DESCRIPTION -->
+				<div class="form-group row">
+					<label for="description" class="font-weight-bold col-sm-3 col-form-label col-lg-2">Description*</label>
+					<textarea ng-class="{ 'is-invalid': submitted && f.description.errors }" class="form-control col-sm-9" type="text" name="description" ng-model="offre.description" ng-required="true" ng-minlength="20" ng-maxlength="1024"></textarea>
+
+                    <p ng-show="form.description.$error.required || form.description.$error.minlength || form.description.$error.maxlength" class="help-block">La description est requise (20 à 1024 caractères)</p>
+
+				</div>
+                
+                <!-- MESSAGE ERROR -->
+				<div class="form-group row">
+					<div ng-if="messageError" class="col-12 alert alert-danger">{{messageError}}</div>
+					<div ng-if="messageSuccess" class="col-12 alert alert-success">{{messageSuccess}}</div>
+				</div>
+			</form>
+		</div>
+	</div>

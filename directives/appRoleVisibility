@@ -1,0 +1,5 @@
+module.directive("appRoleVisibility", function() { 
+    return { 
+       restrict: "A", 
+    }; 
+});

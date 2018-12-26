@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="app.css">
+    <title>Poleemploi</title>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  
+
+    <!-- ANGULAR -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+
+    <!-- ANGULAR - EXTERNAL MODULES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
+    <script src="./include//js/angular-css.js"></script>
+
+    <!-- ANGULAR - MODULES -->
+    <!--<script src="app.routes.js"></script> https://github.com/RevillWeb/angularjs-by-example/blob/master/src/index.html -->
+    <script src="app.js"></script> 
+    <script src="app-route.js"></script> 
+    <script src="config/constant.js"></script> 
+
+    <!-- ANGULAR - SERVICES-->
+    <script src="services/login.service.js"></script>      
+    <script src="services/offre.service.js"></script>      
+    <script src="services/contrat.service.js"></script>      
+    
+    <!-- ANGULAR - FILTERS -->
+    <script src="filters/range.filter.js"></script>      
+
+    <!-- ANGULAR - CONTROLLERS-->
+    <script src="components/header/header.controller.js"></script>      
+    <script src="components/login/login.controller.js"></script>      
+    <script src="components/offre/offre-liste.controller.js"></script>      
+    <script src="components/entreprise/offre/offre-liste.controller.js"></script>      
+    <script src="components/entreprise/offre/offre-edit.controller.js"></script>      
+    <script src="components/pagination/pagination.contrloller.js"></script>      
+
+    <!-- ANGULAR - INTERCEPTORS -->
+    <script src="interceptors/token.interceptor.js"></script>      
+    
+    <!-- OTHER -->
+    <script src="angular-error-handling.js"></script>      
+
+  </head>
+  <body ng-app="mainApp">
+
+    <ng-include src="'components/header/header.html'"></ng-include>
+    
+    <div ng-view>Empty</div>
+    
+  </body>
+  </html>

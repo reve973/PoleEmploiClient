@@ -1,0 +1,35 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Connexion</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form name="form" novalidate >
+
+      <div class="form-group">
+        <label for="username">Identifiant</label>
+        <input type="text" ng-model="identifiant" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" autofocus ng-required="true"/>
+        <p ng-show="form.identifiant.$error.required" class="help-block">L'identifiant est requis !</p>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" ng-model="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" ng-required="true"/>
+        <p ng-show="form.password.$error.required" class="help-block">Le mot de passe est requis !</p>
+      </div>
+
+      <p ng-show="loginError" class="help-block">Erreur d'identifiant ou de mot de passe</p>
+      
+    </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" ng-click="cancel()">Annuler</button>
+    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="connect()">Ok</button>
+
+  </div>
+</div>
